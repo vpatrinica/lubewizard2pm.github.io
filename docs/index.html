@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LubeWizard2 BOM Cost Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'slate': {
+                850: '#172033'
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Subtle darkened backdrop so content stays readable */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(180deg, rgba(7,10,17,0.65), rgba(10,13,23,0.7));
+        backdrop-filter: blur(6px);
+      }
+
+      /* Decorative bobacat container sits behind the app but above the backdrop */
+      .decor-bobacats {
+        position: fixed;
+        inset: 0;
+        z-index: -2; /* behind content but above the before-backdrop */
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .bobacat {
+        position: absolute;
+        background-repeat: no-repeat;
+        background-size: contain;
+        opacity: 0.14;
+        filter: drop-shadow(0 6px 18px rgba(2,6,23,0.6));
+        transform-origin: center;
+        will-change: transform, opacity;
+        animation: bob 8s ease-in-out infinite;
+      }
+
+      /* Variations: size, position, rotation, animation delay */
+      .bobacat-1 {
+        width: 360px;
+        height: 360px;
+        left: -6%;
+        top: 6%;
+        transform: rotate(-12deg);
+        /* Gold bobacat */
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140"><g fill="none"><circle cx="70" cy="70" r="60" fill="%23FBBF24"/><path d="M38 45 L58 26 L70 45" fill="%23FBBF24"/><path d="M102 45 L84 26 L72 45" fill="%23FBBF24"/><circle cx="52" cy="76" r="7" fill="%23081412"/><circle cx="88" cy="76" r="7" fill="%23081412"/><path d="M52 96 Q70 110 88 96" stroke="%23081412" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="54" y="40" width="32" height="8" rx="2" fill="%23FFD54A" opacity="0.9"/><path d="M35 85 L45 78 L55 82 L48 90 Z" fill="%23FFD54A"/></g></svg>');
+        animation-duration: 11s;
+        animation-delay: 0s;
+        opacity: 0.18;
+      }
+
+      .bobacat-2 {
+        width: 260px;
+        height: 260px;
+        right: -4%;
+        top: 22%;
+        transform: rotate(8deg);
+        /* Ruby bobacat */
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140"><g fill="none"><circle cx="70" cy="70" r="60" fill="%23E11D48"/><path d="M38 45 L58 26 L70 45" fill="%23E11D48"/><path d="M102 45 L84 26 L72 45" fill="%23E11D48"/><circle cx="52" cy="76" r="7" fill="%23081412"/><circle cx="88" cy="76" r="7" fill="%23081412"/><path d="M52 96 Q70 110 88 96" stroke="%23081412" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(70,28) scale(0.5)"><polygon points="0,0 12,18 24,0 12,36" fill="%23FFD1DA" opacity="0.9"/></g></g></svg>');
+        animation-duration: 9s;
+        animation-delay: 1.5s;
+        opacity: 0.17;
+      }
+
+      .bobacat-3 {
+        width: 160px;
+        height: 160px;
+        left: 12%;
+        bottom: -6%;
+        transform: rotate(20deg);
+  /* Excavator / construction bobacat */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140"><g fill="none"><circle cx="70" cy="70" r="60" fill="%23F59E0B"/><path d="M38 45 L58 26 L70 45" fill="%23F59E0B"/><path d="M102 45 L84 26 L72 45" fill="%23F59E0B"/><circle cx="52" cy="76" r="7" fill="%23081412"/><circle cx="88" cy="76" r="7" fill="%23081412"/><path d="M52 96 Q70 110 88 96" stroke="%23081412" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(48,78)"><rect x="22" y="-6" width="44" height="10" rx="2" fill="%23211F1F"/><rect x="58" y="-4" width="18" height="6" rx="1" fill="%23211F1F" transform="rotate(22 67 -1)"/><circle cx="86" cy="2" r="6" fill="%23211F1F"/></g></g></svg>');
+        animation-duration: 12s;
+        animation-delay: 0.6s;
+        opacity: 0.18;
+      }
+
+      @keyframes bob {
+        0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+        50% { transform: translateY(-12px) rotate(calc(var(--r, 0deg) + 2deg)); }
+      }
+
+      /* Reduce decorations on small screens to keep content prominent */
+      @media (max-width: 640px) {
+        .bobacat-1 { display: none; }
+        .bobacat-2 { opacity: 0.08; width: 180px; height: 180px; right: -10%; top: 14%; }
+        .bobacat-3 { left: 6%; bottom: -12%; width: 120px; height: 120px; }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "recharts": "https://aistudiocdn.com/recharts@^3.1.2",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <!-- Decorative bobacats: purely visual, aria-hidden so screen readers ignore them -->
+    <div class="decor-bobacats" aria-hidden="true">
+      <div class="bobacat bobacat-1" aria-hidden="true"></div>
+      <div class="bobacat bobacat-2" aria-hidden="true"></div>
+      <div class="bobacat bobacat-3" aria-hidden="true"></div>
+    </div>
+  </body>
+</html>

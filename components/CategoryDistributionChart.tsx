@@ -17,30 +17,43 @@ const RADIAN = Math.PI / 180;
 // the Pie component from Recharts have optional properties in their type definitions,
 // which caused a type conflict. Using `any` on the destructured parameter makes the
 // function signature compatible.
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, name }: any) => {
+  if (percent === undefined || percent === null || !isFinite(percent)) return null;
+  const pct = percent * 100;
+  const radius = innerRadius + (outerRadius - innerRadius) * (pct < 5 ? 1.05 : 0.55);
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-  if (percent * 100 < 5) return null;
-
+  const textAnchor = x > cx ? 'start' : 'end';
+  const display = pct < 1 ? '<1%' : `${Math.round(pct)}%`;
   return (
-    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" className="text-xs font-bold">
-      {`${(percent * 100).toFixed(0)}%`}
+    <text x={x} y={y} fill="#f8fafc" textAnchor={textAnchor} dominantBaseline="central" className="text-[10px] font-semibold">
+      {display}
     </text>
   );
 };
 
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
-    const data = payload[0];
-    const percentage = (data.percent && isFinite(data.percent)) 
-        ? (data.percent * 100).toFixed(2) 
-        : '0.00';
+    const slice = payload[0];
+    const rawPercent = slice.percent; // Provided by Recharts
+    let percentNumber: number | null = null;
+
+    if (rawPercent !== undefined && rawPercent !== null && isFinite(rawPercent)) {
+      percentNumber = rawPercent * 100;
+    } else {
+      // Fallback: compute manually from payload sum
+      const total = payload.reduce((sum: number, p: any) => sum + (typeof p.value === 'number' ? p.value : 0), 0);
+      if (total > 0 && typeof slice.value === 'number') {
+        percentNumber = (slice.value / total) * 100;
+      }
+    }
+
+    const percentage = percentNumber !== null ? percentNumber.toFixed(2) : '0.00';
 
     return (
       <div className="bg-slate-850 p-3 border border-slate-700 rounded-lg shadow-xl">
-        <p className="font-bold" style={{ color: data.payload.fill }}>{`${data.name}: €${data.value.toFixed(2)}`}</p>
+        <p className="font-bold" style={{ color: slice.payload.fill }}>{`${slice.name}: €${slice.value.toFixed(2)}`}</p>
         <p className="text-sm text-slate-300">{`Represents ${percentage}% of total cost`}</p>
       </div>
     );
