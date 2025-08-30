@@ -48,35 +48,6 @@
         background: radial-gradient(circle at 18% 44%, rgba(255,196,64,0.30), rgba(255,196,64,0.06) 48%, transparent 68%);
         mix-blend-mode: soft-light;
       }
-      /* Excavator hero layer */
-      body .excavator-hero {
-        position: fixed;
-        inset: 0;
-        z-index: -2.5;
-        pointer-events: none;
-        background: url('Gemini_Generated_Image_d3gseid3gseid3gs.png') left center / cover no-repeat fixed;
-        filter: brightness(1.08) contrast(1.07) saturate(1.05);
-        opacity: 1;
-        mask-image: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.75) 25%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.35) 70%, rgba(0,0,0,0.10) 100%);
-        -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.75) 25%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.35) 70%, rgba(0,0,0,0.10) 100%);
-      }
-      /* Bobcat (compact loader) layer on the right */
-      body .bobcat-hero {
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        width: 46vw;
-        max-width: 880px;
-        height: 60vh;
-        z-index: -2.4;
-        pointer-events: none;
-        background: url('Gemini_Generated_Image_d3gseid3gseid3gs.png') right bottom / cover no-repeat;
-        opacity: 0.78;
-        filter: brightness(1.05) contrast(1.06) saturate(1.04);
-        mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 22%, rgba(0,0,0,0.92) 55%, rgba(0,0,0,0.70) 85%, rgba(0,0,0,0) 100%);
-        -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 22%, rgba(0,0,0,0.92) 55%, rgba(0,0,0,0.70) 85%, rgba(0,0,0,0) 100%);
-        mix-blend-mode: normal;
-      }
       @media (max-width: 1024px) {
         body .bobcat-hero { width: 60vw; height: 50vh; opacity: 0.65; }
       }
@@ -128,14 +99,12 @@
       }
     </style>
   <!-- Vite Entry Script -->
-  <script type="module" crossorigin src="./assets/index-3XMIGn6-.js"></script>
+  <script type="module" crossorigin src="./assets/index-C9QQPbS6.js"></script>
 </head>
   <body>
-  <div class="excavator-hero" aria-hidden="true"></div>
-  <div class="bobcat-hero" aria-hidden="true"></div>
-  <div class="bg-overlay-gradient" aria-hidden="true"></div>
-  <div class="bg-overlay-radial" aria-hidden="true"></div>
-  <div id="root"></div>
-  <noscript><p style="color:#fff;font:600 14px/1.4 system-ui,Segoe UI,Roboto,sans-serif;text-align:center;padding:1rem;">Diese Anwendung benötigt aktiviertes JavaScript.</p></noscript>
+    <div class="bg-overlay-gradient" aria-hidden="true"></div>
+    <div class="bg-overlay-radial" aria-hidden="true"></div>
+    <div id="root"></div>
+    <noscript><p style="color:#fff;font:600 14px/1.4 system-ui,Segoe UI,Roboto,sans-serif;text-align:center;padding:1rem;">Diese Anwendung benötigt aktiviertes JavaScript.</p></noscript>
   </body>
 </html>

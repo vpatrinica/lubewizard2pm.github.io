@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
       build: {
         outDir: 'docs',
         emptyOutDir: true,
+        assetsDir: 'assets',
       },
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),

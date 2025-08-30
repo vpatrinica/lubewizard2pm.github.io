@@ -8,6 +8,7 @@ import CategoryDistributionChart from './components/CategoryDistributionChart';
 import BomTable from './components/BomTable';
 import type { BomItem, Volume } from './types';
 import Hero from './components/Hero';
+import bgImage from './src/assets/background.png';
 
 const App: React.FC = () => {
   const [selectedVolume, setSelectedVolume] = useState<Volume>(1000);
@@ -53,7 +54,7 @@ const App: React.FC = () => {
     <div className="min-h-screen relative overflow-hidden">
       {/* Vollbild-Hintergrundbild */}
       <img
-        src="/background.png"
+        src={bgImage}
         alt="Excavator"
         className="absolute inset-0 w-full h-full object-cover"
         style={{ filter: 'brightness(1.15) contrast(1.05)' }}
