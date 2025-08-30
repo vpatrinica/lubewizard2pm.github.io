@@ -1,0 +1,5 @@
+{
+  "name": "LubeWizard2 BOM Cost Visualizer",
+  "description": "An interactive dashboard to visualize the Bill of Materials (BOM) cost data for the LubeWizard2 project. It presents data through charts and tables, breaking down costs by component and production volume.",
+  "requestFramePermissions": []
+}
