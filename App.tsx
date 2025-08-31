@@ -9,6 +9,7 @@ import BomTable from './components/BomTable';
 import type { BomItem, Volume } from './types';
 import Hero from './components/Hero';
 import bgImage from './src/assets/background.png';
+import ExplainerVideo from './components/ExplainerVideo';
 
 const App: React.FC = () => {
   const [selectedVolume, setSelectedVolume] = useState<Volume>(1000);
@@ -66,6 +67,7 @@ const App: React.FC = () => {
       <div className="relative min-h-screen text-gray-200 font-sans p-4 sm:p-6 lg:p-8">
         <div className="max-w-7xl mx-auto">
           <Header />
+          <ExplainerVideo />
           <Hero />
 
           <main className="space-y-6 mt-4">
