@@ -20,7 +20,7 @@ const ExplainerVideo: React.FC = () => {
 
   return (
     <div className="mt-2 mb-4">
-      <div className="relative max-w-5xl mx-auto rounded-xl overflow-hidden shadow-2xl ring-1 ring-slate-800/60 bg-black/40 backdrop-blur-sm">
+      <div className="relative mx-auto rounded-xl overflow-hidden shadow-2xl ring-1 ring-slate-800/60 bg-black/40 backdrop-blur-sm w-[60%] max-w-3xl min-w-[300px]">
         <div className="absolute inset-0 bg-gradient-to-tr from-black/50 via-black/15 to-transparent pointer-events-none" />
         <video
           className="w-full h-full aspect-video object-cover"

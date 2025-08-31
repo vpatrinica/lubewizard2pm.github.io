@@ -64,7 +64,7 @@ const App: React.FC = () => {
       {/* leichte Tönung für Textlesbarkeit */}
       <div className="absolute inset-0 bg-black/25" />
 
-      <div className="relative min-h-screen text-gray-200 font-sans p-4 sm:p-6 lg:p-8">
+  <div className="relative min-h-screen text-gray-200 font-sans">
         <div className="max-w-7xl mx-auto">
           <Header />
           <ExplainerVideo />
