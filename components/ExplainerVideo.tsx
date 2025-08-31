@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import videoSrc from '../src/assets/The_Product_s_Price_Tag.mp4';
 import posterImg from '../src/assets/background.png';
 
@@ -6,17 +6,10 @@ import posterImg from '../src/assets/background.png';
  * ExplainerVideo
  * Zeigt das hinzugefügte MP4 Erklärvideo prominent oben auf der Seite.
  * - Responsive 16:9 Wrapper
- * - Autoplay (muted + inline) – respektiert prefers-reduced-motion
- * - Fallback Controls
+ * - Manuelles Abspielen mit sichtbaren Controls (Autoplay entfernt, damit Browser-Policies kein Abspielen blockieren)
  */
 const ExplainerVideo: React.FC = () => {
-  const [shouldAutoplay, setShouldAutoplay] = useState(true);
-
-  useEffect(() => {
-    // Respektiere Nutzerpräferenz für reduzierte Bewegung
-    const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mql.matches) setShouldAutoplay(false);
-  }, []);
+  // Autoplay entfernt, da einige Browser trotz muted blockieren und dann keine Controls sichtbar waren.
 
   return (
     <div className="mt-2 mb-4">
@@ -25,13 +18,10 @@ const ExplainerVideo: React.FC = () => {
         <video
           className="w-full h-full aspect-video object-cover"
           poster={posterImg}
-          // Autoplay nur falls erlaubt
-          autoPlay={shouldAutoplay}
+          controls
           muted
-            // eslint-disable-next-line jsx-a11y/media-has-caption
-          loop
           playsInline
-          controls={!shouldAutoplay}
+          preload="metadata"
         >
           <source src={videoSrc} type="video/mp4" />
           Your browser does not support the video tag.
